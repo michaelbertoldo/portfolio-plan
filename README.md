@@ -1,33 +1,64 @@
-# portfolio-plan
-career roadmap
+# Algorithmic Trading Research Platform — portfolio dashboard
 
-Portfolio Plan for Information Systems
+A public, read-only case study for QuantFinanceLearn. The dashboard separates
+historical research from genuine forward SHADOW evidence and contains no broker
+connection, order submission, PAPER activation, or live-trading controls.
 
-Specialization: AI Automation, Consulting, Product Management, Fintech
+## Local development
 
-I am aiming for the intersection of AI-driven product management and financial technology. My dual focus on venture capital evaluation, skill in building functional Python pipelines, and knowledge of AI and automations position me well for strategy, consulting, and product roles.
-Tech related experience:
+```bash
+npm install
+npm run dev
+```
 
+Production-style development expects a sanitized snapshot at
+`public/data/quant-finance-status.json`. If it is absent, the interface renders
+the designed unavailable state. For local UI work only, opt into the clearly
+labelled demonstration fixture:
 
-Current Experience: I have strong, hands-on experience in LLM workflow design, prototyping AI mentoring software, building trading bots, and developing CRM automations. I have also gained business and product management skills from 2 start ups and project design and developer experience with the On campus internship building an AI mentor tool for BYU.
-Missing Experience: I lack exposure to managing product lifecycles within large, established corporate tech environments or collaborating within a structured, multi-developer agile engineering team. I need to learn to work in a team, and I need to learn how to operate in a professional office. This is why I am seeking out a professional internship at a big established firm this summer.
+```bash
+VITE_USE_STATUS_FIXTURE=true npm run dev
+```
 
-Work Experiences to Pursue this year
-Strategy and Product Internship
-AI automations consulting
-Technical Venture Capital Roles
-Continuing as a research assistant
-Freelance web/app/workflow development
+## Quality checks
 
-Portfolio Format
-I will use both a technical GitHub repository to showcase backend architecture and complex logic, and a deployed web portfolio to visualize user-facing product outcomes and business impact. Both will help me effectively showcase my technological skills.
+```bash
+npm run format:check
+npm run lint
+npm test
+npm run build
+```
 
-Projects & Courses for Portfolio Work
-Startup Sourcing Pipeline: Refine this Python and REST API tool to demonstrate enterprise value in automating deal flow.
-AI Mentoring Assistant: Package the WhatsApp integration and LLM prompt engineering as a case study, highlighting the early-adopter clients secured.
-Polymarket trading bot on Kalshi: Using historical data to analyze trades and perform risk mitigation calculations with python scrapers.
-Mobile app social party game: Use React Native to build a fun real time multiplayer party game.
-Venture Capital software: follows deals through the process for due diligence on a front end
-I will start documenting my progress with the AI mentorship tool I am developing as the project manager. I have full control over the development of the product.
-I will also start making my 30+ projects live and viewable from the web portfolio and in my github so potential employers can easily see it.
+## Publishing sanitized status
 
+Generate the allowlisted snapshot from a separate clean QuantFinanceLearn
+worktree or clone. Point the exporter at the scheduled checkout's ledger; it is
+opened read-only while the sanitized file is written in the isolated checkout.
+Then copy that file into this repository:
+
+```bash
+python scripts/export_public_status.py \
+  --database /path/to/scheduled-checkout/data/phase2/operations.db \
+  --output outputs/public-dashboard/status.json
+
+cp outputs/public-dashboard/status.json \
+  /path/to/portfolio-plan/public/data/quant-finance-status.json
+```
+
+Never generate or edit tracked dashboard data inside the scheduled operational
+QuantFinanceLearn worktree. A dirty operational worktree intentionally blocks
+SHADOW collection.
+
+## Deployment
+
+The project is a Vite static site. Vercel can import the repository using the
+included `vercel.json`; no environment secrets are required. Other static hosts
+should run `npm run build`, publish `dist/`, and provide SPA fallback to
+`index.html`.
+
+The frontend must never receive Alpaca credentials, database files, webhook
+URLs, broker-account information, or direct access to QuantFinanceLearn. It
+consumes only `/data/quant-finance-status.json`.
+
+Historical backtests and forward SHADOW observations do not establish future
+profitability. PAPER remains locked and live trading is unavailable.
