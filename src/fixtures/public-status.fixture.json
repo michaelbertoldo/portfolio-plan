@@ -1,0 +1,43 @@
+{
+  "fixture": true,
+  "label": "DEMONSTRATION DATA — NOT GENUINE FORWARD EVIDENCE",
+  "snapshot": {
+    "generated_at": "2000-01-03T22:00:00Z",
+    "freshness": {
+      "state": "fresh",
+      "age_seconds": 0,
+      "stale_after_seconds": 345600
+    },
+    "operating_mode": "SHADOW",
+    "strategy": {
+      "name": "Cross-Asset Momentum",
+      "version": "1.0.0"
+    },
+    "universe": ["SPY", "QQQ", "IWM", "DIA", "TLT", "GLD"],
+    "evaluation": {
+      "qualifying_sessions": { "completed": 0, "required": 60 },
+      "month_end_cycles": { "completed": 0, "required": 2 },
+      "latest_successful_session": "2000-01-03"
+    },
+    "portfolio": {
+      "equity": 500,
+      "cash": 500,
+      "gross_exposure": 0,
+      "drawdown": 0,
+      "positions": []
+    },
+    "operational_health": {
+      "reconciliation_accepted": true,
+      "unresolved_error_count": 0,
+      "open_alert_count": 0,
+      "duplicate_proposal_count": 0,
+      "risk_pause_active": false
+    },
+    "phase_gate_progress": {
+      "historical_research": "complete",
+      "forward_shadow_evaluation": "active",
+      "paper_evaluation": "locked",
+      "live_consideration": "unavailable"
+    }
+  }
+}
