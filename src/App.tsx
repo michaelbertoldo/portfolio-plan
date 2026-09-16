@@ -264,10 +264,10 @@ function ProgressGauge({
         className="gauge-ring"
         style={{ "--progress": `${percentage * 3.6}deg` } as CSSProperties}
         role="img"
-        aria-label={`${label}: ${completed} of ${required}, ${percentage}% complete`}
+        aria-label={`${label}: ${visualValue} of ${required}, ${percentage}% complete`}
       >
         <span>
-          <strong>{completed}</strong>
+          <strong>{visualValue}</strong>
           <small>/ {required}</small>
         </span>
       </div>

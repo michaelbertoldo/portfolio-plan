@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-09-16T17:42:01.320553Z",
+  "freshness": {
+    "state": "fresh",
+    "age_seconds": 72706,
+    "stale_after_seconds": 345600
+  },
+  "operating_mode": "SHADOW",
+  "strategy": {
+    "name": "Cross-Asset Momentum",
+    "version": "1.0.0"
+  },
+  "universe": ["SPY", "QQQ", "IWM", "DIA", "TLT", "GLD"],
+  "evaluation": {
+    "qualifying_sessions": {
+      "completed": 4,
+      "required": 60
+    },
+    "month_end_cycles": {
+      "completed": 0,
+      "required": 2
+    },
+    "latest_successful_session": "2026-09-15"
+  },
+  "portfolio": {
+    "equity": 500.0,
+    "cash": 500.0,
+    "gross_exposure": 0.0,
+    "drawdown": 0.0,
+    "positions": []
+  },
+  "operational_health": {
+    "reconciliation_accepted": true,
+    "unresolved_error_count": 0,
+    "open_alert_count": 0,
+    "duplicate_proposal_count": 0,
+    "risk_pause_active": false
+  },
+  "phase_gate_progress": {
+    "historical_research": "complete",
+    "forward_shadow_evaluation": "active",
+    "paper_evaluation": "locked",
+    "live_consideration": "unavailable"
+  }
+}

@@ -116,9 +116,33 @@ describe("public dashboard states", () => {
     expect(progress.value).toBe(60);
     expect(
       screen.getByRole("img", {
-        name: /Qualifying sessions: 87 of 60, 100% complete/,
+        name: /Qualifying sessions: 60 of 60, 100% complete/,
       }),
     ).toBeInTheDocument();
+  });
+
+  it("never displays progress above 60 sessions or 2 month-end cycles", async () => {
+    const snapshot = healthySnapshot({
+      evaluation: {
+        qualifying_sessions: { completed: 87, required: 60 },
+        month_end_cycles: { completed: 4, required: 2 },
+        latest_successful_session: "2026-09-14",
+      },
+    });
+    render(<App loadSnapshot={() => Promise.resolve(result(snapshot))} />);
+
+    expect(
+      await screen.findByRole("img", {
+        name: "Qualifying sessions: 60 of 60, 100% complete",
+      }),
+    ).toHaveTextContent("60/ 60");
+    expect(
+      screen.getByRole("img", {
+        name: "Month-end cycles: 2 of 2, 100% complete",
+      }),
+    ).toHaveTextContent("2/ 2");
+    expect(screen.queryByText("87")).not.toBeInTheDocument();
+    expect(screen.queryByText("4")).not.toBeInTheDocument();
   });
 
   it("does not stay in loading after a successful response", async () => {
